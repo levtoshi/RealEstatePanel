@@ -1,0 +1,149 @@
+.modal
+{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active
+{
+    display: flex;
+}
+
+.modal_content
+{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal_header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal_header h2
+{
+    font-size: 22px;
+    color: #2c3e50;
+}
+
+.close_button
+{
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #7f8c8d;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close_button:hover
+{
+    color: #e74c3c;
+}
+
+.form_group
+{
+    margin-bottom: 20px;
+}
+
+.form_group label
+{
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form_group input,
+.form_group select,
+.form_group textarea
+{
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form_group input:focus,
+.form_group select:focus,
+.form_group textarea:focus
+{
+    outline: none;
+    border-color: #3498db;
+}
+
+.form_group textarea
+{
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form_row
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form_buttons
+{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.button
+{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.primary_button
+{
+    background-color: #3498db;
+    color: white;
+}
+
+.primary_button:hover
+{
+    background-color: #2980b9;
+}
+
+.secondary_button
+{
+    background-color: #95a5a6;
+    color: white;
+}
+
+.secondary_button:hover
+{
+    background-color: #7f8c8d;
+}
