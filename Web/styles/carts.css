@@ -1,0 +1,147 @@
+/* Constainer */
+.estate_container {
+    position: relative;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Area */
+.estate-area_container {
+    position: absolute;
+    top: 35px;
+    left: 25px;
+    z-index: 2;
+  
+    background: #fff;
+    border: 3px solid black;
+    border-radius: 7px;
+    padding: 5px 10px;
+
+    color: black;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.estate-area_text::after {
+    content: " m2";
+}
+
+/* Image */
+.estate-image_container {
+    height: 150px;
+    margin-top: 50px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.estate_image {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Category */
+.category_container {
+    position: absolute;
+    top: 175px;
+    right: -5px;
+    z-index: 2;
+
+    background: rgba(0, 0, 0, 0.6);
+    padding: 7px 10px;
+    border-radius: 7px;
+  
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Title */
+.estate_title {
+    margin: 25px 10px 10px;
+
+    text-align: center;
+    
+    font-weight: 600;
+    font-size: 24px;
+    color: #222;
+}
+
+/* Location */
+.estate_location {
+    margin: 20px 20px 70px;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 20px;
+    color: #666;
+}
+
+/* Price and icons */
+.price-cart_flex {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* Price */
+.estate-price_text {
+    color: #176800;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.estate-price_text::after
+{
+    content: " $";
+}
+
+/* Icons */
+.icons_flex
+{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.fa-pen-to-square {
+    font-size: 24px;
+    color: #0a9d00;
+    cursor: pointer;
+}
+
+.fa-trash
+{
+    font-size: 24px;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.fa-pen-to-square:hover {
+    font-size: 24px;
+    color: #0cb200;
+    cursor: pointer;
+}
+
+.fa-trash:hover
+{
+    font-size: 24px;
+    color: #e73a4b;
+    cursor: pointer;
+}

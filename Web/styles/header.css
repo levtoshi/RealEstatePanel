@@ -1,3 +1,4 @@
+/* Container */
 .header
 {
     background-color: #0e42bd;
@@ -16,6 +17,7 @@
     font-weight: 500;
 }
 
+/* Button */
 .create_button
 {
     background-color: #ffffff;
@@ -35,6 +37,7 @@
     background-color: #e0e0e0;
 }
 
+/* Adaptation */
 @media (max-width: 576px)
 {
     .header

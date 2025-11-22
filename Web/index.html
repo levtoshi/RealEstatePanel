@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/modal.css">
+    <link rel="stylesheet" href="./styles/carts.css">
+    <link rel="stylesheet" href="./styles/delete-modal.css">
     <title>Real Esate Control Panel</title>
 </head>
 <body>
@@ -16,8 +19,28 @@
     </header>
 
     <!-- Cards -->
-    <div class="estate_container">
-        
+    <div class="estates_container">
+        <!-- <div class="estate_container"
+            <div class="estate-area_container">
+                <p class="estate-area_text">25</p>
+            </div>
+            <div class="estate-image_container">
+                <img class="estate_image" src="https://static01.nyt.com/images/2019/06/02/nyregion/02nyluxury2/02nyluxury2-videoSixteenByNineJumbo1600.jpg" alt="product_image">
+            </div>
+            <div class="category_container">
+                <p class="category_text">Apartments</p>
+            </div>
+            <p class="estate_title">Lovely Apartmen4235o</p>
+            <p class="estate_location">USA, New York City, John street, 845555555555555555555555555555555</p>
+
+            <div class="price-cart_flex">
+                <p class="estate-price_text">10000000</p>
+                <div class="icons_flex">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>    
+        </div> -->
     </div>
 
     <!-- Modal window -->
@@ -37,7 +60,7 @@
                     name="name"
                     placeholder="Example: villa"
                     minlength="3"
-                    maxlength="50"
+                    maxlength="20"
                     required>
                     <span class="error_message"></span>
                 </div>
@@ -63,6 +86,7 @@
                         name="area"
                         placeholder="250"
                         min="10"
+                        max="1000000"
                         step="0.1"
                         required>
                         <span class="error_message"></span>
@@ -75,6 +99,7 @@
                         name="price"
                         placeholder="50000000"
                         min="1000"
+                        max="1000000000"
                         step="1"
                         required>
                         <span class="error_message"></span>
@@ -111,9 +136,20 @@
                     id="cancelButton">Cancel</button>
                     <button type="submit"
                     class="button primary_button">Save</button>
-                    <span class="error_message"></span>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="delete-modal" id="deleteModal">
+        <div class="modal_content">
+            <h2 class="delete-modal_title" id="modalTitle">Delete real estate</h2>
+            
+            <div class="delete-buttons_flex">
+                <button class="delete_button" id="deleteButton">Delete</button>
+                <button class="cancel-deletion_button" id="deleteCancelButton">Cancel</button>
+            </div>
         </div>
     </div>
 
