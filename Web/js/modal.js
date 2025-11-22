@@ -1,4 +1,4 @@
-export class Modal
+class Modal
 {
     constructor()
     {
@@ -8,6 +8,9 @@ export class Modal
         this.form = document.getElementById('estateForm');
         this.modalTitle = document.getElementById('modalTitle');
         this.onSubmit = null;
+
+        this.isEditMode = false;
+        this.editId = null;
 
         this.initEventListeners();
         this.initValidation();
@@ -109,6 +112,24 @@ export class Modal
     {
         this.modal.classList.add('active');
         this.modalTitle.textContent = 'Add real estate';
+        
+        this.isEditMode = false;
+        this.editId = null;
+    }
+
+    openForEdit(id, data)
+    {
+        this.modal.classList.add('active');
+        this.modalTitle.textContent = 'Edit real estate';
+
+        Object.keys(data).forEach(key => {
+            if (this.form.elements[key]) {
+                this.form.elements[key].value = data[key];
+            }
+        });
+
+        this.isEditMode = true;
+        this.editId = id;
     }
 
     close()
@@ -132,8 +153,18 @@ export class Modal
 
         if (this.onSubmit)
         {
-            this.close();
-            this.onSubmit(formData);
+            if (this.isEditMode)
+            {
+                this.close();
+                this.onSubmit(this.editId, formData);
+            }
+            else
+            {
+                this.close();
+                this.onSubmit(formData);
+            }   
         }
     }
 }
+
+export const modal = new Modal();

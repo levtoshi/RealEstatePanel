@@ -1,24 +1,66 @@
-import { Modal } from "./modal.js";
+// Imports
+import { modal } from "./modal.js";
+import { deleteModal } from "./deleteModal.js";
+import { estateStorage } from "./storage.js";
+import { cardsRendering } from "./cards.js";
 
-const realEstates = [];
-
+// Add
 function addEstate(formData)
 {
-    realEstates.push(formData);
-    console.log(realEstates);
+    estateStorage.add(formData);
+    cardsRendering.renderElements(estateStorage.getAll());
 }
 
+// Update
+function updateEstate(id, updatedData)
+{
+    estateStorage.update(id, updatedData);
+    cardsRendering.renderElements(estateStorage.getAll());
+}
+
+// Delete
+function deleteEstate(id)
+{
+    estateStorage.delete(id);
+    cardsRendering.renderElements(estateStorage.getAll());
+}
+
+// App
 function app()
 {
-    const modal = new Modal();
-    modal.onSubmit = addEstate;
-
-    const btnCreate = document.getElementById("create-estate-button");
-
-    btnCreate.addEventListener("click", () =>
-    {
-        modal.open();
-    })
+    initCardsRendering();
+    initModal();
 }
 
+// Inits
+function initCardsRendering()
+{
+    cardsRendering.renderElements(estateStorage.getAll());
+
+    cardsRendering.editCallback = (id) =>
+    {
+        modal.onSubmit = updateEstate;
+        modal.openForEdit(id, estateStorage.getById(id));
+    };
+
+    cardsRendering.deleteCallback = (id) =>
+    {
+        deleteModal.deletionId = id;
+        deleteModal.open();
+    };
+
+    deleteModal.onDelete = deleteEstate;
+}
+
+function initModal()
+{
+    const btnCreate = document.getElementById("create-estate-button");
+    btnCreate.addEventListener("click", () =>
+    {
+        modal.onSubmit = addEstate;
+        modal.open();
+    });
+}
+
+// Start app
 document.addEventListener("DOMContentLoaded", app);

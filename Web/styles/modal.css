@@ -1,3 +1,4 @@
+/* Containers */
 .modal
 {
     display: none;
@@ -29,6 +30,7 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Header */
 .modal_header
 {
     display: flex;
@@ -60,6 +62,7 @@
     color: #e74c3c;
 }
 
+/* Form */
 .form_group
 {
     margin-bottom: 20px;
@@ -108,16 +111,17 @@
     gap: 15px;
 }
 
- .form_group input:valid,
- .form_group select:valid,
- .form_group textarea:valid {
+/* Validation */
+.form_group input:valid,
+.form_group select:valid,
+.form_group textarea:valid {
     border-color: #27ae60;
- }
+}
 
- .form_group input:invalid:not(:placeholder-shown),
- .form_group textarea:invalid:not(:placeholder-shown) {
+.form_group input:invalid:not(:placeholder-shown),
+.form_group textarea:invalid:not(:placeholder-shown) {
     border-color: #e74c3c;
- }
+}
 
 .error_message {
     display: block;
@@ -127,7 +131,7 @@
     min-height: 18px;
 }
 
-
+/* Buttons */
 .form_buttons
 {
     display: flex;
