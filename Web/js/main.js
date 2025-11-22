@@ -13,7 +13,7 @@ function app()
     const modal = new Modal();
     modal.onSubmit = addEstate;
 
-    const btnCreate = document.getElementById("create-estate_button");
+    const btnCreate = document.getElementById("create-estate-button");
 
     btnCreate.addEventListener("click", () =>
     {
