@@ -1,0 +1,45 @@
+.filters_container {
+    display: grid;
+    gap: 20px;
+    width: 100%;
+    margin: 25px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.filters_container select,
+.filters_container input {
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 20px;
+    border: 1px solid #cfcfcf;
+    border-radius: 15px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+/* > 600px  */
+@media (min-width: 601px) {
+    .filters_container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+
+/* 600px – 360px */
+@media (max-width: 600px) and (min-width: 361px) {
+    .filters_container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #estateSort {
+        grid-column: span 2;
+    }
+}
+
+/* < 360px  */
+@media (max-width: 360px) {
+    .filters_container {
+        grid-template-columns: 1fr;
+    }
+}

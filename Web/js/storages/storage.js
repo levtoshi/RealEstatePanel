@@ -1,7 +1,6 @@
 class EstateStorage {
     constructor() {
         this.estates = JSON.parse(localStorage.getItem("estates")) || [];
-        //console.log(this.estates);
     }
 
     // CRUD Operations

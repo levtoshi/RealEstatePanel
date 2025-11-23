@@ -1,55 +1,78 @@
 // Imports
-import { modal } from "./modal.js";
-import { deleteModal } from "./deleteModal.js";
-import { estateStorage } from "./storage.js";
-import { cardsRendering } from "./cards.js";
+
+// Modals
+import { modal } from "./modals/modal.js";
+import { deleteModal } from "./modals/deleteModal.js";
+
+// Storages
+import { estateStorage } from "./storages/storage.js";
+
+// Controllers
+import { cardsController } from "./controllers/cardsController.js";
+import { filtersController } from "./controllers/filtersController.js";
+
+// Data
+import { estates } from "./data/estatesData.js";
 
 // Add
 function addEstate(formData)
 {
     estateStorage.add(formData);
-    cardsRendering.renderElements(estateStorage.getAll());
+    filtersController.filter();
 }
 
 // Update
 function updateEstate(id, updatedData)
 {
     estateStorage.update(id, updatedData);
-    cardsRendering.renderElements(estateStorage.getAll());
+    filtersController.filter();
 }
 
 // Delete
 function deleteEstate(id)
 {
     estateStorage.delete(id);
-    cardsRendering.renderElements(estateStorage.getAll());
+    filtersController.filter();
 }
 
 // App
 function app()
 {
+    // initLocalStorage();
     initCardsRendering();
     initModal();
+    intiFiltering();
 }
 
 // Inits
+function intiFiltering()
+{
+    filtersController.renderCallback = cardsController.renderElements.bind(cardsController);
+    filtersController.getElementsCallback = estateStorage.getAll.bind(estateStorage);
+    filtersController.filter();
+}
+
 function initCardsRendering()
 {
-    cardsRendering.renderElements(estateStorage.getAll());
-
-    cardsRendering.editCallback = (id) =>
+    cardsController.editCallback = (id) =>
     {
         modal.onSubmit = updateEstate;
         modal.openForEdit(id, estateStorage.getById(id));
     };
 
-    cardsRendering.deleteCallback = (id) =>
+    cardsController.deleteCallback = (id) =>
     {
         deleteModal.deletionId = id;
         deleteModal.open();
     };
 
     deleteModal.onDelete = deleteEstate;
+}
+
+function initLocalStorage()
+{
+    localStorage.clear();
+    localStorage.setItem("estates", JSON.stringify(estates));
 }
 
 function initModal()

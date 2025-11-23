@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/modal.css">
     <link rel="stylesheet" href="./styles/carts.css">
-    <link rel="stylesheet" href="./styles/delete-modal.css">
+    <link rel="stylesheet" href="./styles/filters.css">
+
+    <link rel="stylesheet" href="./styles/modals/modal.css">
+    <link rel="stylesheet" href="./styles/modals/delete-modal.css">
     <title>Real Esate Control Panel</title>
 </head>
 <body>
@@ -17,6 +20,34 @@
         <h1>Estate</h1>
         <button class="create_button" id="create-estate-button">Add real estate</button>
     </header>
+
+    <!-- Filters -->
+    <div class="filters_container">
+        <!-- Category -->
+        <select id="estateFilterCategory" name="category">
+            <option value="All">-- All categories --</option>
+            <option value="Apartments">Apartments</option>
+            <option value="Houses">Houses</option>
+            <option value="Commercial property">Commercial property</option>
+        </select>
+
+        <!-- Name -->
+        <input type="text"
+                id="estateFilerName"
+                name="filterName"
+                placeholder="-- search estate (by name or location) --"
+                minlength="3"
+                maxlength="20">
+
+        <!-- Sort -->
+         <select id="estateSort" name="sort">
+            <option value="Default">-- Sort estates (don't sort) --</option>
+            <option value="Increase">by increasing price</option>
+            <option value="Decrease">by decreasing price</option>
+            <option value="Newest">newest first</option>
+            <option value="Oldest">oldest first</option>
+        </select>
+    </div>
 
     <!-- Cards -->
     <div class="estates_container">
@@ -72,7 +103,7 @@
                         <option value="">Select category</option>
                         <option value="Apartments">Apartments</option>
                         <option value="Houses">Houses</option>
-                        <option value="Commercial propetry">Commercial propetry</option>
+                        <option value="Commercial property">Commercial property</option>
                     </select>
                     <span class="error_message"></span>
                 </div>
@@ -152,6 +183,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Pagination -->
+    <footer>
+
+    </footer>
 
     <script src="./js/main.js" type="module"></script>
 </body>

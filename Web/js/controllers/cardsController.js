@@ -1,4 +1,4 @@
-class CardsRendering
+class CardsController
 {
     constructor()
     {
@@ -95,4 +95,4 @@ class CardsRendering
     }
 }
 
-export const cardsRendering = new CardsRendering();
+export const cardsController = new CardsController();
