@@ -14,6 +14,11 @@ class EstateStorage {
 
         this.estates.push(newEstate);
         this.setItemToLS();
+        if (this.paginationCallback)
+        {
+            this.paginationCallback(this.estates.length);
+        }
+
         return newEstate;
     }
 
@@ -26,6 +31,11 @@ class EstateStorage {
                 updatedAt: new Date().toISOString()
             }
             this.setItemToLS();
+            if (this.paginationCallback)
+            {
+                this.paginationCallback(this.estates.length);
+            }
+
             return this.estates[index];
         }
         return null;
@@ -37,6 +47,11 @@ class EstateStorage {
         if (index !== -1) {
             this.estates.splice(index, 1);
             this.setItemToLS();
+            if (this.paginationCallback)
+            {
+                this.paginationCallback(this.estates.length);
+            }
+
             return true;
         }
         return false;
