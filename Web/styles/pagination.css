@@ -37,7 +37,8 @@
 
 .page_button.active
 {
-  background: #cccccc;
+  /* background: #cccccc; */
+  border: 4px solid #000000;
 }
 
 .dots

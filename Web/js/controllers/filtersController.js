@@ -41,10 +41,9 @@ class FiltersController
 
         if (this.filterArray)
         {
-            this.paginationCallback(this.filterArray.length);
-
             this.setRenderArrayCallback(this.filterArray);
             this.renderCallback(this.filterArray);
+            this.paginationCallback(this.filterArray.length);
         }
     }
 
@@ -52,7 +51,6 @@ class FiltersController
     {
         if (this.categoryFilter.value !== "All")
         {
-            console.log(this.categoryFilter.value);
             this.filterArray = this.filterArray.filter(estate => estate.category === this.categoryFilter.value);
         }
     }
