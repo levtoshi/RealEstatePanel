@@ -129,6 +129,10 @@ class PaginationController
             {
                 this.unshowCurrentPage();
             }
+            else
+            {
+                this.showCurrentPage();
+            }
         }
 
         this.currentElBtn.textContent = this.paginationPage;

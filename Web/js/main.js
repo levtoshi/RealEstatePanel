@@ -43,7 +43,7 @@ function app()
     initPagination();
     initCardsRendering();
     initModal();
-    intiFiltering();
+    initFiltering();
 }
 
 // Inits
@@ -52,7 +52,7 @@ function initPagination()
     paginationController.renderCardsCallback = cardsController.renderElements.bind(cardsController);
 }
 
-function intiFiltering()
+function initFiltering()
 {
     filtersController.renderCallback = cardsController.renderElements.bind(cardsController);
     filtersController.getElementsCallback = estateStorage.getAll.bind(estateStorage);
