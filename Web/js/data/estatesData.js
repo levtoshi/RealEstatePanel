@@ -10,7 +10,7 @@ const sampleCategories = ["Apartments", "Houses", "Commercial property"];
 
 export const estates = [];
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 200; i++) {
   estates.push({
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),

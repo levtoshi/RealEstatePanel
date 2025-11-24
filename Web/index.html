@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="./styles/modals/modal.css">
     <link rel="stylesheet" href="./styles/modals/delete-modal.css">
+    <link rel="stylesheet" href="./styles/pagination.css">
     <title>Real Esate Control Panel</title>
 </head>
 <body>
@@ -185,9 +186,16 @@
     </div>
 
     <!-- Pagination -->
-    <footer>
+    <div class="pagination_container">
+        <button class="page_button" id="prevPage">«</button>
+        <button class="page_button active" id="firstPage">1</button>
+        <span class="dots before-dots disable" id="dotsBefore">...</span>
+        <button class="page_button current-page disable active" id="currentPage">1</button>
+        <span class="dots after" id="dotsAfter">...</span>
+        <button class="page_button" id="lastPage"></button>
+        <button class="page_button" id="nextPage">»</button>
+    </div>
 
-    </footer>
 
     <script src="./js/main.js" type="module"></script>
 </body>

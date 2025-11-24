@@ -8,6 +8,8 @@ class FiltersController
         
         this.renderCallback = null;
         this.getElementsCallback = null;
+        this.paginationCallback = null;
+        this.setRenderArrayCallback = null;
         this.filterArray = [];
 
         this.initEventListeners();
@@ -37,8 +39,11 @@ class FiltersController
         this.filterBySearch();
         this.filterByOther();
 
-        if (this.renderCallback && this.filterArray)
+        if (this.filterArray)
         {
+            this.paginationCallback(this.filterArray.length);
+
+            this.setRenderArrayCallback(this.filterArray);
             this.renderCallback(this.filterArray);
         }
     }

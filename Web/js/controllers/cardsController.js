@@ -4,6 +4,10 @@ class CardsController
     {
         this.editCallback = null;
         this.deleteCallback = null;
+
+        this.array = [];
+        this.getPaginationPageCallback = null;
+        this.getPageElementAmountCallback = null;
     }
 
     // Rendering
@@ -83,15 +87,29 @@ class CardsController
         return productContainer;
     }
 
-    renderElements(arr)
+    renderElements()
     {
         const productContainer = document.querySelector(".estates_container");
         productContainer.innerHTML = "";
 
-        arr.forEach((element) => {
-            const card = this.createElement(element);
-            productContainer.append(card);
-        });
+        let paginationPage = this.getPaginationPageCallback();
+        let pageElementAmount = this.getPageElementAmountCallback();
+
+        for (let i = ((paginationPage - 1) * pageElementAmount);
+            i < (paginationPage * pageElementAmount);
+            i++)
+        {
+            if (this.array[i])
+            {
+                const card = this.createElement(this.array[i]);
+                productContainer.append(card);
+            }
+        }
+    }
+
+    setRenderArray(array)
+    {
+        this.array = array;
     }
 }
 

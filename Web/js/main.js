@@ -5,9 +5,10 @@ import { modal } from "./modals/modal.js";
 import { deleteModal } from "./modals/deleteModal.js";
 
 // Storages
-import { estateStorage } from "./storages/storage.js";
+import { estateStorage } from "./storages/estateStorage.js";
 
 // Controllers
+import { paginationController } from "./controllers/paginationController.js";
 import { cardsController } from "./controllers/cardsController.js";
 import { filtersController } from "./controllers/filtersController.js";
 
@@ -38,17 +39,26 @@ function deleteEstate(id)
 // App
 function app()
 {
-    // initLocalStorage();
+    //initLocalStorage();
+    initPagination();
     initCardsRendering();
     initModal();
     intiFiltering();
 }
 
 // Inits
+function initPagination()
+{
+    paginationController.renderCardsCallback = cardsController.renderElements.bind(cardsController);
+}
+
 function intiFiltering()
 {
     filtersController.renderCallback = cardsController.renderElements.bind(cardsController);
     filtersController.getElementsCallback = estateStorage.getAll.bind(estateStorage);
+    filtersController.setRenderArrayCallback = cardsController.setRenderArray.bind(cardsController);
+    filtersController.paginationCallback = paginationController.updateLastPage.bind(paginationController);
+
     filtersController.filter();
 }
 
@@ -67,6 +77,9 @@ function initCardsRendering()
     };
 
     deleteModal.onDelete = deleteEstate;
+
+    cardsController.getPaginationPageCallback = paginationController.getPaginationPage.bind(paginationController);
+    cardsController.getPageElementAmountCallback = paginationController.getPageElementAmount.bind(paginationController);
 }
 
 function initLocalStorage()
