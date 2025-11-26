@@ -41,9 +41,9 @@ class FiltersController
 
         if (this.filterArray)
         {
-            this.setRenderArrayCallback(this.filterArray);
-            this.renderCallback(this.filterArray);
             this.paginationCallback(this.filterArray.length);
+            this.setRenderArrayCallback(this.filterArray);
+            this.renderCallback();
         }
     }
 
