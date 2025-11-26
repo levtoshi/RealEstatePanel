@@ -1,173 +1,149 @@
-class PaginationController
-{
-    constructor()
-    {
+class PaginationController {
+    constructor() {
+        // Buttons
         this.prevBtn = document.getElementById("prevPage");
-        this.firstElBtn = document.getElementById("firstPage");
-        this.dotsBefore = document.getElementById("dotsBefore");
-        this.currentElBtn = document.getElementById("currentPage");
-        this.lastElBtn = document.getElementById("lastPage");
         this.nextBtn = document.getElementById("nextPage");
+        this.firstBtn = document.getElementById("firstPage");
+        this.currentBtn = document.getElementById("currentPage");
+        this.lastBtn = document.getElementById("lastPage");
+        this.dotsBefore = document.getElementById("dotsBefore");
 
-        this.paginationPagesAmount = 0;
-        this.pageElementAmount = 14;
-        this.paginationPage = 1;
+        // Pagination
+        this.page = 1;
+        this.totalPages = 0;
+        this.itemsPerPage = 14;
 
-        this.currentElShown = false;
-
+        this.currentVisible = false;
         this.renderCardsCallback = null;
 
-        this.initEventListeners();
+        this.addListeners();
     }
 
     // Inits
-    initEventListeners()
-    {
-        this.prevBtn.addEventListener("click", () =>
-        {
-            if (this.paginationPage > 1)
-            {
-                if (this.paginationPage === this.paginationPagesAmount)
-                {
-                    this.showCurrentPage();
-                }
-                else if (this.paginationPage === 2)
-                {
-                    this.unshowCurrentPage();
-                }
-                
-                this.paginationPage--;
-                this.currentElBtn.textContent = this.paginationPage;
-                this.updateFirstLastActive();
-                this.renderCardsCallback();
-            }
-        });
-
-        this.nextBtn.addEventListener("click", () =>
-        {
-            if (this.paginationPage < this.paginationPagesAmount)
-            {
-                if (this.paginationPage === 1)
-                {
-                    this.showCurrentPage();
-                }
-                else if (this.paginationPage === this.paginationPagesAmount - 1)
-                {
-                    this.unshowCurrentPage();
-                }
-                
-                this.paginationPage++;
-                this.currentElBtn.textContent = this.paginationPage;
-                this.updateFirstLastActive();
-                this.renderCardsCallback();
-            }
-        });
-
-        this.firstElBtn.addEventListener("click", () =>
-        {
-            if (this.paginationPage != 1)
-            {
-                this.paginationPage = 1;
-                this.updateFirstLastActive();
-                this.renderCardsCallback();
-                this.unshowCurrentPage();
-            }
-        });
-
-        this.lastElBtn.addEventListener("click", () =>
-        {
-            if (this.paginationPage != this.paginationPagesAmount)
-            {
-                this.paginationPage = this.paginationPagesAmount;
-                this.updateFirstLastActive();
-                this.renderCardsCallback();
-                this.unshowCurrentPage();
-            }
-        });
+    addListeners() {
+        this.prevBtn.addEventListener("click", () => this.goPrev());
+        this.nextBtn.addEventListener("click", () => this.goNext());
+        this.firstBtn.addEventListener("click", () => this.goFirst());
+        this.lastBtn.addEventListener("click", () => this.goLast());
     }
 
-    // Show / Unshow page
-    showCurrentPage()
-    {
-        if (!this.currentElShown)
-        {
-            this.dotsBefore.classList.remove("disable");
-            this.currentElBtn.classList.remove("disable");
+    goPrev() {
+        if (this.page <= 1) return;
 
-            this.currentElShown = !this.currentElShown;
+        this.setPage(this.page - 1);
+
+        if (this.page === 1) 
+        {
+            this.hideCurrent();
+        }
+        else
+        {
+            this.showCurrent();
         }
     }
 
-    unshowCurrentPage()
-    {
-        if (this.currentElShown)
+    goNext() {
+        if (this.page >= this.totalPages) return;
+
+        if (this.page === 1) 
         {
-            this.dotsBefore.classList.add("disable");
-            this.currentElBtn.classList.add("disable");
-            
-            this.currentElShown = !this.currentElShown;
+            this.showCurrent();
         }
+        if (this.page === this.totalPages - 1)
+        {
+            this.hideCurrent();
+        }
+
+        this.setPage(this.page + 1);
     }
 
-    // Update last pagination page
-    updateLastPage(elementsAmount)
-    {
-        let oldPaginationPagesAmount = this.paginationPagesAmount;
-        let oldPaginationPage = this.paginationPage;
-
-        this.paginationPagesAmount = Math.ceil(elementsAmount / this.pageElementAmount);
-        
-        if (oldPaginationPagesAmount)
-        {
-            this.paginationPage = Math.ceil((this.paginationPagesAmount / oldPaginationPagesAmount) * oldPaginationPage);
-
-            if (this.paginationPage === 1)
-            {
-                this.unshowCurrentPage();
-            }
-            else if (this.paginationPage === this.paginationPagesAmount)
-            {
-                this.unshowCurrentPage();
-            }
-            else
-            {
-                this.showCurrentPage();
-            }
-        }
-
-        this.currentElBtn.textContent = this.paginationPage;
-        this.lastElBtn.textContent = this.paginationPagesAmount;
-        this.updateFirstLastActive();
+    goFirst() {
+        if (this.page === 1) return;
+        this.hideCurrent();
+        this.setPage(1);
     }
 
-    updateFirstLastActive()
-    {
-        if (this.firstElBtn)
-        {
-            if (this.paginationPage === 1)
-                this.firstElBtn.classList.add('active');
-            else
-                this.firstElBtn.classList.remove('active');
+    goLast() {
+        if (this.page === this.totalPages) return;
+        this.hideCurrent();
+        this.setPage(this.totalPages);
+    }
+
+    // Core logic
+    setPage(newPage) {
+        this.page = newPage;
+        this.currentBtn.textContent = this.page;
+        this.updateActiveStates();
+
+        if (this.renderCardsCallback)
+            this.renderCardsCallback();
+
+        //this.debug();
+    }
+
+    // Show / Hide current page
+    showCurrent() {
+        if (this.currentVisible) return;
+
+        this.dotsBefore.classList.remove("disable");
+        this.currentBtn.classList.remove("disable");
+        this.currentVisible = true;
+    }
+
+    hideCurrent() {
+        if (!this.currentVisible) return;
+
+        this.dotsBefore.classList.add("disable");
+        this.currentBtn.classList.add("disable");
+        this.currentVisible = false;
+    }
+
+    // Сhange
+    updateLastPage(totalItems) {
+        const prevTotalPages = this.totalPages;
+        const prevPage = this.page;
+
+        this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+
+        if (prevTotalPages) {
+            this.page = Math.ceil((this.totalPages / prevTotalPages) * prevPage);
+
+            if (this.page <= 1) this.hideCurrent();
+            else if (this.page >= this.totalPages) this.hideCurrent();
+            else this.showCurrent();
+        } else if (totalItems > 0) {
+            this.page = 1;
         }
 
-        if (this.lastElBtn)
-        {
-            if (this.paginationPage === this.paginationPagesAmount)
-                this.lastElBtn.classList.add('active');
-            else
-                this.lastElBtn.classList.remove('active');
-        }
+        this.firstBtn.textContent = totalItems === 0 ? 0 : 1;
+        this.currentBtn.textContent = this.page;
+        this.lastBtn.textContent = this.totalPages;
+
+        this.updateActiveStates();
+        //this.debug();
+    }
+
+    // Update state
+    updateActiveStates() {
+        this.firstBtn.classList.toggle("active", this.page === 1);
+        this.lastBtn.classList.toggle("active", this.page === this.totalPages);
     }
 
     // Getters
-    getPaginationPage()
-    {
-        return this.paginationPage;
+    getPaginationPage() {
+        return this.page;
     }
-    
-    getPageElementAmount()
-    {
-        return this.pageElementAmount;
+
+    getPageElementAmount() {
+        return this.itemsPerPage;
+    }
+
+    // Debug
+    debug() {
+        console.log(`page: ${this.page}`);
+        console.log(`totalPages: ${this.totalPages}`);
+        console.log(`currentVisible: ${this.currentVisible}`);
+        console.log("--------------------------------------------------");
     }
 }
 
